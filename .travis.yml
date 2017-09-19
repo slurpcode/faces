@@ -1,0 +1,26 @@
+language: python
+
+sudo: false
+
+python:
+  - "3.6"
+  - "3.6-dev" # 3.6 development branch
+  - "3.7-dev" # 3.7 development branch
+  - "nightly" # currently points to 3.7-dev
+
+install: "pip install requests"
+
+script:
+  - python run.py
+
+branches:
+  only:
+    - master
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $token
+  local_dir: site
+  on:
+    branch:  master
