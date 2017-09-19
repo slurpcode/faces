@@ -36,7 +36,7 @@ for i, person in enumerate(loads['items']):
        <div class="col-md-4">
         <div class="thumbnail">
           <a href="{profile}" target="_blank">
-            <img src="{filename}" alt="{user}">
+            <img src="{filename}" alt="{user}" title="{user}">
           </a>
         </div>
       </div>      
