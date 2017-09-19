@@ -3,7 +3,7 @@ import requests
 from urllib.request import urlretrieve
 
 
-page = requests.get('https://api.github.com/search/users?q=followers:1..10000000')
+page = requests.get('https://api.github.com/search/users?q=followers:1..10000000&per_page=100')
 loads = json.loads(page.content)
 
 page = """<!DOCTYPE html>
