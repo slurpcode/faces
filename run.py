@@ -2,11 +2,9 @@ import json
 import requests
 from urllib.request import urlretrieve
 
+
 page = requests.get('https://api.github.com/search/users?q=followers:1..10000000')
 loads = json.loads(page.content)
-
-login = []
-userpage = []
 
 page = """<!DOCTYPE html>
 <html>
