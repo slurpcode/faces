@@ -11,6 +11,9 @@ print(lastrun)
 if lastrun < 80000:
     page = requests.get('https://api.github.com/search/users?q=followers:1..10000000&per_page=100')
     page2 = requests.get('https://api.github.com/search/users?q=followers:1..10000000&per_page=100&page=2')
+
+    #save to file page.content
+
     loads = [json.loads(page.content), json.loads(page2.content)]
     page = """<!DOCTYPE html>
     <html>
@@ -30,6 +33,14 @@ if lastrun < 80000:
             div.row {width: 374px; height: 374px;}
             img {width: 374px; height: 374px;}
         </style>
+         <!-- Global Site Tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-106852135-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());        
+          gtag('config', 'UA-106852135-1');
+        </script>
       </head>
       <body>
         <div class="container">"""
@@ -51,15 +62,7 @@ if lastrun < 80000:
             """.format(profile=person['html_url'], filename="./images/faces/local-filename%s.png" % k,
                        user=person['login'], )
     page += """
-        </div>
-        <!-- Global Site Tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-106852135-1"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments)};
-          gtag('js', new Date());        
-          gtag('config', 'UA-106852135-1');
-        </script>
+        </div>       
         <!-- Latest compiled and minified JavaScript -->
         <script src="bootstrap/js/jquery.min.js"></script>
         <script src="bootstrap/js/popper.min.js"></script> 
