@@ -5,16 +5,18 @@ import time
 import os
 
 
-lastrun = int(time.time()) - os.path.getmtime("./site/images/faces/local-filename99.png")
+lastrun = int(time.time()) - os.path.getmtime("./site/index.html")
 print(lastrun)
 
-if lastrun < 80000:
-    page = requests.get('https://api.github.com/search/users?q=followers:1..10000000&per_page=100')
-    page2 = requests.get('https://api.github.com/search/users?q=followers:1..10000000&per_page=100&page=2')
+if lastrun < 3000:
+    gsearch = 'https://api.github.com/search/users?q=followers:1..10000000&per_page=100'
+    searches = [gsearch, '%s%s' % (gsearch, '&page=2')]
+    loads = []
+    for x in searches:
+        page = requests.get(x)
+        loads.append(json.loads(page.content))
 
     #save to file page.content
-
-    loads = [json.loads(page.content), json.loads(page2.content)]
     page = """<!DOCTYPE html>
     <html>
       <head>
@@ -26,7 +28,7 @@ if lastrun < 80000:
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <style>
-            .container {max-width: 1500px;}      
+            .container {max-width: 1900px;}      
             .row {float: left;}
             body {line-height: 0;}
             col-md-4 {width: 374px; height: 374px;}
@@ -49,7 +51,7 @@ if lastrun < 80000:
             k = i * 100 + j
             print(k, person)
 
-            urlretrieve(person['avatar_url'], "./site/images/faces/local-filename%s.png" % k)
+            urlretrieve(person['avatar_url'], "./site/images/faces/%s.png" % person['login'])
             page += """<div class="row">
                <div class="col-md-4">
                 <div class="thumbnail">
@@ -59,7 +61,7 @@ if lastrun < 80000:
                 </div>
               </div>      
             </div>
-            """.format(profile=person['html_url'], filename="./images/faces/local-filename%s.png" % k,
+            """.format(profile=person['html_url'], filename="./images/faces/%s.png" % person['login'],
                        user=person['login'], )
     page += """
         </div>       
@@ -73,5 +75,8 @@ if lastrun < 80000:
     target = open('site/index.html', 'w')
     target.write(page)
     target.close()
+
 else:
     print("wait")
+
+
