@@ -8,7 +8,7 @@ import os
 lastrun = int(time.time()) - os.path.getmtime("./site/images/faces/local-filename99.png")
 print(lastrun)
 
-if lastrun < 1000:
+if lastrun < 80000:
     page = requests.get('https://api.github.com/search/users?q=followers:1..10000000&per_page=100')
     page2 = requests.get('https://api.github.com/search/users?q=followers:1..10000000&per_page=100&page=2')
     loads = [json.loads(page.content), json.loads(page2.content)]
@@ -51,10 +51,18 @@ if lastrun < 1000:
             """.format(profile=person['html_url'], filename="./images/faces/local-filename%s.png" % k,
                        user=person['login'], )
     page += """
-        </div>   
+        </div>
+        <!-- Global Site Tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-106852135-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());        
+          gtag('config', 'UA-106852135-1');
+        </script>
         <!-- Latest compiled and minified JavaScript -->
         <script src="bootstrap/js/jquery.min.js"></script>
-        <script src="bootstrap/js/popper.js"></script> 
+        <script src="bootstrap/js/popper.min.js"></script> 
         <script src="bootstrap/js/bootstrap.min.js"></script>    
       </body>
     </html>
