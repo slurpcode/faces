@@ -8,7 +8,7 @@ import os
 lastrun = int(time.time()) - os.path.getmtime("./site/index.html")
 print(lastrun)
 
-if lastrun < 3000:
+if lastrun < 73000:
     gsearch = 'https://api.github.com/search/users?q=followers:1..10000000&per_page=100'
     searches = [gsearch, '%s%s' % (gsearch, '&page=2')]
     loads = []
@@ -16,7 +16,7 @@ if lastrun < 3000:
         page = requests.get(x)
         loads.append(json.loads(page.content))
 
-    #save to file page.content
+    #
     page = """<!DOCTYPE html>
     <html>
       <head>
@@ -51,7 +51,13 @@ if lastrun < 3000:
             k = i * 100 + j
             print(k, person)
 
-            urlretrieve(person['avatar_url'], "./site/images/faces/%s.png" % person['login'])
+            localtime = os.path.getmtime("./site/images/faces/%s.png" % person['login'])
+            remotetime = os.system("curl --silent --head %s | awk '/^Last-Modified/{print $0}' | sed 's/^Last-Modified: //'" % (person['avatar_url']))
+
+            if localtime - remotetime < 0:
+                print('remote newer')
+                urlretrieve(person['avatar_url'], "./site/images/faces/%s.png" % person['login'])
+
             page += """<div class="row">
                <div class="col-md-4">
                 <div class="thumbnail">
