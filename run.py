@@ -1,5 +1,5 @@
 """
-Python 3 script to build a webpage of avatars from GitHub mostly followed profiles or users.
+Python 3 script to build a web page of GitHub avatars from users with the most followers.
 """
 
 from urllib.request import urlretrieve
