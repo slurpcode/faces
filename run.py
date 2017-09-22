@@ -1,12 +1,16 @@
+"""
+Python 3 script to build a webpage of avatars from GitHub mostly followed profiles or users.
+"""
+
 from urllib.request import urlretrieve
-from calendar import timegm 
+from calendar import timegm
 import json
-import requests
 import time
 import os
+import requests
 
 
-# debug / change run time 
+# debug / change run time
 lastrun = int(time.time()) - os.path.getmtime("./site/index.html")
 print(lastrun)
 
@@ -14,11 +18,12 @@ print(lastrun)
 if lastrun < 73000:
     gsearch = 'https://api.github.com/search/users?q=followers:1..10000000&per_page=100'
     searches = [gsearch, '%s%s' % (gsearch, '&page=2')]
-    loads = []; logins = []
+    loads = []
+    logins = []
     for x in searches:
         page = requests.get(x)
         loads.append(json.loads(page.content))
-        
+
     #
     page = """<!DOCTYPE html>
 <html>
@@ -55,16 +60,16 @@ if lastrun < 73000:
             k = i * 100 + j
             print(k, person)
             logins.append(person['login'])
-            
+
             # fix ?? for deleting old avatars that are no longer top 200.
             # wait until we have 201 or more avatars to test code.
             try:
                 localtime = os.path.getmtime("./site/images/faces/%s.png" % person['login'])
-            except (FileNotFoundError):
+            except FileNotFoundError:
                 localtime = 0
 
             with open(('./temp/%s.txt' % person['login']), 'w+') as f:
-                os.system("curl --silent --head %s | awk '/^Last-Modified/{print $0}' | sed 's/^Last-Modified: //' > ./temp/%s.txt" % (person['avatar_url'], person['login']))
+                os.system("curl --silent --head %s | awk '/^Last-Modified/{print $0}' | sed 's/^Last-Modified: //' > %s" % (person['avatar_url'], f.name))
                 first_line = f.readline().rstrip()
 
                 print(first_line)
@@ -90,10 +95,13 @@ if lastrun < 73000:
                     </div>
                 </div>      
             </div>""".format(profile=person['html_url'], filename="./images/faces/%s.png" % person['login'],
-                   user=person['login'])
+                             user=person['login'])
 
     page += """
-            <a href="https://info.flagcounter.com/sesT"><img id="flagcounter" src="https://s11.flagcounter.com/count2/sesT/bg_FFFFFF/txt_000000/border_CCCCCC/columns_3/maxflags_100/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter"></a>
+            <a href="https://info.flagcounter.com/sesT">
+                <img id="flagcounter" alt="Flag Counter" 
+                     src="https://s11.flagcounter.com/count2/sesT/bg_FFFFFF/txt_000000/border_CCCCCC/columns_3/maxflags_100/viewers_0/labels_0/pageviews_0/flags_0/percent_0/">
+            </a>
         </div>       
         <!-- Latest compiled and minified JavaScript -->
         <script src="bootstrap/js/jquery.min.js"></script>
@@ -109,8 +117,5 @@ if lastrun < 73000:
     #
     print(logins)
 
-    
 else:
     print("wait")
-
-
