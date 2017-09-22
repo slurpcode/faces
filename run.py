@@ -89,7 +89,7 @@ if lastrun < 73000:
               </div>      
             </div>
             """.format(profile=person['html_url'], filename="./images/faces/%s.png" % person['login'],
-                       user=person['login'], )
+                       user=person['login'])
 
     page += """
         </div>       
