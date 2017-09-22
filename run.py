@@ -18,11 +18,11 @@ if lastrun < 73000:
     for x in searches:
         page = requests.get(x)
         loads.append(json.loads(page.content))
-
+        
     #
     page = """<!DOCTYPE html>
-    <html>
-      <head>
+<html>
+    <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,24 +31,24 @@ if lastrun < 73000:
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <style>
-            .container {max-width: 1900px;}      
+            .container {max-width: 1900px;}
             .row {float: left;}
             body {line-height: 0;}
             col-md-4 {width: 374px; height: 374px;}
             div.row {width: 374px; height: 374px;}
             img {width: 374px; height: 374px;}
-             #flagcounter {width: auto; height: auto; position: fixed; bottom: 0px; left: 0px; margin-top: 65px; }
+            #flagcounter {width: auto; height: auto; position: fixed; bottom: 0px; left: 0px; margin-top: 65px; }
         </style>
          <!-- Global Site Tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-106852135-1"></script>
         <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments)};
-          gtag('js', new Date());        
-          gtag('config', 'UA-106852135-1');
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments)};
+            gtag('js', new Date());        
+            gtag('config', 'UA-106852135-1');
         </script>
-      </head>
-      <body>
+    </head>
+    <body>
         <div class="container">"""
     for i, x in enumerate(loads):
         for j, person in enumerate(x['items']):
@@ -80,17 +80,17 @@ if lastrun < 73000:
                 else:
                     print('local newer')
 
-            page += """<div class="row">
-               <div class="col-md-4">
-                <div class="thumbnail">
-                  <a href="{profile}" target="_blank">
-                    <img src="{filename}" alt="{user}" title="{user}">
-                  </a>
-                </div>
-              </div>      
-            </div>
-            """.format(profile=person['html_url'], filename="./images/faces/%s.png" % person['login'],
-                       user=person['login'])
+            page += """
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <a href="{profile}" target="_blank">
+                            <img src="{filename}" alt="{user}" title="{user}">
+                        </a>
+                    </div>
+                </div>      
+            </div>""".format(profile=person['html_url'], filename="./images/faces/%s.png" % person['login'],
+                   user=person['login'])
 
     page += """
             <a href="https://info.flagcounter.com/sesT"><img id="flagcounter" src="https://s11.flagcounter.com/count2/sesT/bg_FFFFFF/txt_000000/border_CCCCCC/columns_3/maxflags_100/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter"></a>
@@ -99,9 +99,9 @@ if lastrun < 73000:
         <script src="bootstrap/js/jquery.min.js"></script>
         <script src="bootstrap/js/popper.min.js"></script> 
         <script src="bootstrap/js/bootstrap.min.js"></script>    
-      </body>
-    </html>
-    """
+    </body>
+</html>"""
+
     target = open('site/index.html', 'w')
     target.write(page)
     target.close()
