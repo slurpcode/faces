@@ -1,17 +1,20 @@
 from urllib.request import urlretrieve
+from calendar import timegm 
 import json
 import requests
 import time
 import os
 
 
+# debug / change run time 
 lastrun = int(time.time()) - os.path.getmtime("./site/index.html")
 print(lastrun)
 
+# run it
 if lastrun < 73000:
     gsearch = 'https://api.github.com/search/users?q=followers:1..10000000&per_page=100'
     searches = [gsearch, '%s%s' % (gsearch, '&page=2')]
-    loads = []
+    loads = []; logins = []
     for x in searches:
         page = requests.get(x)
         loads.append(json.loads(page.content))
@@ -50,13 +53,31 @@ if lastrun < 73000:
         for j, person in enumerate(x['items']):
             k = i * 100 + j
             print(k, person)
+            logins.append(person['login'])
+            
+            # fix ?? for deleting old avatars that are no longer top 200.
+            # wait until we have 201 or more avatars to test code.
+            try:
+                localtime = os.path.getmtime("./site/images/faces/%s.png" % person['login'])
+            except (FileNotFoundError):
+                localtime = 0
 
-            localtime = os.path.getmtime("./site/images/faces/%s.png" % person['login'])
-            remotetime = os.system("curl --silent --head %s | awk '/^Last-Modified/{print $0}' | sed 's/^Last-Modified: //'" % (person['avatar_url']))
+            with open(('./temp/%s.txt' % person['login']), 'w+') as f:
+                os.system("curl --silent --head %s | awk '/^Last-Modified/{print $0}' | sed 's/^Last-Modified: //' > ./temp/%s.txt" % (person['avatar_url'], person['login']))
+                first_line = f.readline().rstrip()
 
-            if localtime - remotetime < 0:
-                print('remote newer')
-                urlretrieve(person['avatar_url'], "./site/images/faces/%s.png" % person['login'])
+                print(first_line)
+                print(time.strptime(first_line, "%a, %d %b %Y %H:%M:%S GMT"))
+                print(timegm(time.strptime(first_line, "%a, %d %b %Y %H:%M:%S GMT")))
+
+                remotetime = timegm(time.strptime(first_line, "%a, %d %b %Y %H:%M:%S GMT"))
+
+                # only download users avatar if its newer than the current local one.
+                if localtime < remotetime:
+                    print('remote newer')
+                    urlretrieve(person['avatar_url'], "./site/images/faces/%s.png" % person['login'])
+                else:
+                    print('local newer')
 
             page += """<div class="row">
                <div class="col-md-4">
@@ -69,6 +90,7 @@ if lastrun < 73000:
             </div>
             """.format(profile=person['html_url'], filename="./images/faces/%s.png" % person['login'],
                        user=person['login'], )
+
     page += """
         </div>       
         <!-- Latest compiled and minified JavaScript -->
@@ -82,6 +104,10 @@ if lastrun < 73000:
     target.write(page)
     target.close()
 
+    #
+    print(logins)
+
+    
 else:
     print("wait")
 
