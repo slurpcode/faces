@@ -11,21 +11,26 @@ import requests
 
 
 # debug / change run time
-lastrun = int(time.time()) - os.path.getmtime("./site/index.html")
-print(lastrun)
+last_run = int(time.time()) - os.path.getmtime("./site/index.html")
+print(last_run)
 
-# run it
-if lastrun < 73000:
-    gsearch = 'https://api.github.com/search/users?q=followers:1..10000000&per_page=100'
-    searches = [gsearch, '%s%s' % (gsearch, '&page=2')]
-    loads = []
-    logins = []
-    for x in searches:
-        page = requests.get(x)
-        loads.append(json.loads(page.content))
 
-    #
-    page = """<!DOCTYPE html>
+def run(last_run_time):
+    """
+    :param last_run_time:
+    Function to build the web page of avatars.
+    """
+    if last_run_time < 73000:
+        user_search = 'https://api.github.com/search/users?q=followers:1..10000000&per_page=100'
+        user_searches = [user_search, '%s%s' % (user_search, '&page=2')]
+        loads = []
+        user_logins = []
+        for api_search in user_searches:
+            page = requests.get(api_search)
+            loads.append(json.loads(page.content))
+
+        # HTML page header
+        page = """<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -55,37 +60,39 @@ if lastrun < 73000:
     </head>
     <body>
         <div class="container">"""
-    for i, x in enumerate(loads):
-        for j, person in enumerate(x['items']):
-            k = i * 100 + j
-            print(k, person)
-            logins.append(person['login'])
+        for i, each_json in enumerate(loads):
+            for j, person in enumerate(each_json['items']):
+                k = i * 100 + j
+                print(k, person)
+                user_logins.append(person['login'])
 
-            # fix ?? for deleting old avatars that are no longer top 200.
-            # wait until we have 201 or more avatars to test code.
-            try:
-                localtime = os.path.getmtime("./site/images/faces/%s.png" % person['login'])
-            except FileNotFoundError:
-                localtime = 0
+                # fix ?? for deleting old avatars that are no longer top 200.
+                # wait until we have 201 or more avatars to test code.
+                try:
+                    localtime = os.path.getmtime("./site/images/faces/%s.png" % person['login'])
+                except FileNotFoundError:
+                    localtime = 0
 
-            with open(('./temp/%s.txt' % person['login']), 'w+') as f:
-                os.system("curl --silent --head %s | awk '/^Last-Modified/{print $0}' | sed 's/^Last-Modified: //' > %s" % (person['avatar_url'], f.name))
-                first_line = f.readline().rstrip()
+                with open(('./temp/%s.txt' % person['login']), 'w+') as fname:
+                    curl_string = "curl --silent --head %s | awk '/^Last-Modified/{print $0}'"
+                    curl_string += " | sed 's/^Last-Modified: //' > %s"
+                    os.system(curl_string % (person['avatar_url'], fname.name))
+                    first_line = fname.readline().rstrip()
 
-                print(first_line)
-                print(time.strptime(first_line, "%a, %d %b %Y %H:%M:%S GMT"))
-                print(timegm(time.strptime(first_line, "%a, %d %b %Y %H:%M:%S GMT")))
+                    print(first_line)
+                    print(time.strptime(first_line, "%a, %d %b %Y %H:%M:%S GMT"))
+                    print(timegm(time.strptime(first_line, "%a, %d %b %Y %H:%M:%S GMT")))
 
-                remotetime = timegm(time.strptime(first_line, "%a, %d %b %Y %H:%M:%S GMT"))
+                    remotetime = timegm(time.strptime(first_line, "%a, %d %b %Y %H:%M:%S GMT"))
 
-                # only download users avatar if its newer than the current local one.
-                if localtime < remotetime:
-                    print('remote newer')
-                    urlretrieve(person['avatar_url'], "./site/images/faces/%s.png" % person['login'])
-                else:
-                    print('local newer')
+                    # only download users avatar if its newer than the current local one.
+                    if localtime < remotetime:
+                        print('remote newer')
+                        urlretrieve(person['avatar_url'], "./site/images/faces/%s.png" % person['login'])
+                    else:
+                        print('local newer')
 
-            page += """
+                page += """
             <div class="row">
                 <div class="col-md-4">
                     <div class="thumbnail">
@@ -97,7 +104,8 @@ if lastrun < 73000:
             </div>""".format(profile=person['html_url'], filename="./images/faces/%s.png" % person['login'],
                              user=person['login'])
 
-    page += """
+        # HTML page footer
+        page += """
             <a href="https://info.flagcounter.com/sesT">
                 <img id="flagcounter" alt="Flag Counter" 
                      src="https://s11.flagcounter.com/count2/sesT/bg_FFFFFF/txt_000000/border_CCCCCC/columns_3/maxflags_100/viewers_0/labels_0/pageviews_0/flags_0/percent_0/">
@@ -110,12 +118,15 @@ if lastrun < 73000:
     </body>
 </html>"""
 
-    target = open('site/index.html', 'w')
-    target.write(page)
-    target.close()
+        target = open('site/index.html', 'w')
+        target.write(page)
+        target.close()
 
-    #
-    print(logins)
+        #
+        print(user_logins)
 
-else:
-    print("wait")
+    else:
+        print("wait")
+
+
+run(last_run)
