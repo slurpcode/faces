@@ -1,5 +1,7 @@
 """
 Python 3 script to build a web page of GitHub avatars from users with the most followers.
+
+Uses urllib and the requests library.
 """
 
 from urllib.request import urlretrieve
@@ -16,10 +18,7 @@ print(last_run)
 
 
 def run(last_run_time):
-    """
-    :param last_run_time:
-    Function to build the web page of avatars.
-    """
+    """Build the web page of avatars."""
     if last_run_time < 73000:
         user_search = 'https://api.github.com/search/users?q=followers:1..10000000&per_page=100'
         user_searches = [user_search, '%s%s' % (user_search, '&page=2')]
