@@ -41,7 +41,6 @@ def run(last_run_time):
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <style>
-            .container {max-width: 1900px;}
             .row {float: left;}
             body {line-height: 0;}
             col-md-4 {width: 374px; height: 374px;}
@@ -59,7 +58,7 @@ def run(last_run_time):
         </script>
     </head>
     <body>
-        <div class="container">"""
+        <div class="container-fluid">"""
         for i, each_json in enumerate(loads):
             for j, person in enumerate(each_json['items']):
                 k = i * 100 + j
