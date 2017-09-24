@@ -17,19 +17,8 @@ last_run = int(time.time()) - os.path.getmtime("./site/index.html")
 print(last_run)
 
 
-def run(last_run_time):
-    """Build the web page of avatars."""
-    if last_run_time < 73000:
-        user_search = 'https://api.github.com/search/users?q=followers:1..10000000&per_page=100'
-        user_searches = [user_search, '%s%s' % (user_search, '&page=2')]
-        loads = []
-        user_logins = []
-        for api_search in user_searches:
-            page = requests.get(api_search)
-            loads.append(json.loads(page.content))
-
-        # HTML page header
-        page = """<!DOCTYPE html>
+def page_header():
+    return """<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -42,9 +31,7 @@ def run(last_run_time):
         <style>
             .row {float: left;}
             body {line-height: 0;}
-            col-md-4 {width: 374px; height: 374px;}
-            div.row {width: 374px; height: 374px;}
-            img {width: 374px; height: 374px;}
+            .col-md-4, div.row, img {width: 374px; height: 374px;}
             #flagcounter {width: auto; height: auto; position: fixed; bottom: 0px; left: 0px; margin-top: 65px; }
         </style>
          <!-- Global Site Tag (gtag.js) - Google Analytics -->
@@ -58,6 +45,37 @@ def run(last_run_time):
     </head>
     <body>
         <div class="container-fluid">"""
+
+
+def page_footer():
+    return """
+            <a href="https://info.flagcounter.com/sesT">
+                <img id="flagcounter" alt="Flag Counter" 
+                     src="https://s11.flagcounter.com/count2/sesT/bg_FFFFFF/txt_000000/border_CCCCCC/columns_3/maxflags_100/viewers_0/labels_0/pageviews_0/flags_0/percent_0/">
+            </a>
+        </div>       
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="bootstrap/js/jquery.min.js"></script>
+        <script src="bootstrap/js/popper.min.js"></script> 
+        <script src="bootstrap/js/bootstrap.min.js"></script>    
+    </body>
+</html>"""
+
+
+def run(last_run_time):
+    """Build the web page of avatars."""
+    if last_run_time < 73000:
+        user_search = 'https://api.github.com/search/users?q=followers:1..10000000&per_page=100'
+        user_searches = [user_search, '%s%s' % (user_search, '&page=2')]
+        loads = []
+        user_logins = []
+        for api_search in user_searches:
+            page = requests.get(api_search)
+            loads.append(json.loads(page.content))
+
+        # HTML page header
+        page = page_header()
+        # loop over each json load
         for i, each_json in enumerate(loads):
             for j, person in enumerate(each_json['items']):
                 k = i * 100 + j
@@ -103,19 +121,8 @@ def run(last_run_time):
                              user=person['login'])
 
         # HTML page footer
-        page += """
-            <a href="https://info.flagcounter.com/sesT">
-                <img id="flagcounter" alt="Flag Counter" 
-                     src="https://s11.flagcounter.com/count2/sesT/bg_FFFFFF/txt_000000/border_CCCCCC/columns_3/maxflags_100/viewers_0/labels_0/pageviews_0/flags_0/percent_0/">
-            </a>
-        </div>       
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="bootstrap/js/jquery.min.js"></script>
-        <script src="bootstrap/js/popper.min.js"></script> 
-        <script src="bootstrap/js/bootstrap.min.js"></script>    
-    </body>
-</html>"""
-
+        page += page_footer()
+        # write page to file
         target = open('site/index.html', 'w')
         target.write(page)
         target.close()
