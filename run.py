@@ -64,9 +64,11 @@ def page_footer():
 
 def run(last_run_time):
     """Build the web page of avatars."""
-    if last_run_time < 73000:
+    if last_run_time > 73000:
         user_search = 'https://api.github.com/search/users?q=followers:1..10000000&per_page=100'
-        user_searches = [user_search, '%s%s' % (user_search, '&page=2')]
+        user_searches = []
+        for i in range(1, 4):
+            user_searches.append('%s%s%s' % (user_search, '&page=', i))
         loads = []
         user_logins = []
         for api_search in user_searches:
