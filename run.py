@@ -66,7 +66,7 @@ def page_footer():
 
 def run(last_run_time):
     """Build the web page of avatars."""
-    if last_run_time > 73000:
+    if last_run_time > 60000:
         user_search = 'https://api.github.com/search/users?q=followers:1..10000000&per_page=100'
         user_searches = []
         for i in range(1, 4):
@@ -74,8 +74,7 @@ def run(last_run_time):
         loads = []
         user_logins = []
         for api_search in user_searches:
-            page = requests.get(api_search)
-            loads.append(json.loads(page.content))
+            loads.append(json.loads(requests.get(api_search).content))
 
         # HTML page header
         page = page_header()
@@ -108,7 +107,8 @@ def run(last_run_time):
                     # only download users avatar if its newer than the current local one.
                     if localtime < remotetime:
                         print('remote newer')
-                        urlretrieve(person['avatar_url'], "./site/images/faces/%s.png" % person['login'])
+                        urlretrieve(person['avatar_url'],
+                                    "./site/images/faces/%s.png" % person['login'])
                     else:
                         print('local newer')
 
@@ -121,7 +121,8 @@ def run(last_run_time):
                         </a>
                     </div>
                 </div>      
-            </div>""".format(profile=person['html_url'], filename="./images/faces/%s.png" % person['login'],
+            </div>""".format(profile=person['html_url'],
+                             filename="./images/faces/%s.png" % person['login'],
                              user=person['login'])
 
         # HTML page footer
