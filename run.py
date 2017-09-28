@@ -1,5 +1,5 @@
 """
-Python 3 script to build a web page of GitHub avatars from users with the most followers.
+Python 3 script to build a HTML5 web page of GitHub avatars from users with the most followers.
 
 Uses urllib and the requests library.
 """
@@ -18,6 +18,7 @@ print(last_run)
 
 
 def page_header():
+    """HTML5 page header."""
     return """<!DOCTYPE html>
 <html>
     <head>
@@ -48,6 +49,7 @@ def page_header():
 
 
 def page_footer():
+    """HTML5 page footer."""
     return """
             <a href="https://info.flagcounter.com/sesT">
                 <img id="flagcounter" alt="Flag Counter" 
