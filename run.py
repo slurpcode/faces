@@ -74,7 +74,7 @@ def run(last_run_time):
         loads = []
         user_logins = []
         for api_search in user_searches:
-            loads.append(json.loads(requests.get(api_search).content))
+            loads.append(requests.get(api_search).json())
 
         # HTML page header
         page = page_header()
