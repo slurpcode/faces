@@ -5,3 +5,5 @@
 https://hackermanifesto.github.io/faces/
 
 More to come soon...
+
+[![Python Powered](site/images/other/python-powered.png "Python Powered")](https://www.python.org/)
