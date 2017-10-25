@@ -10,5 +10,4 @@ More to come soon...
 
 [![Python Powered](site/images/other/python-powered.png "Python Powered")](https://www.python.org/)
 
-
-[![Pycharm Powered](site/images/pycharm-logo.png "Pycharm Powered")](https://www.jetbrains.com/pycharm/)
+[![Pycharm Powered](site/images/other/pycharm-logo.png "Pycharm Powered")](https://www.jetbrains.com/pycharm/)
