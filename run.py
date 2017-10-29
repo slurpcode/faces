@@ -6,7 +6,6 @@ Uses urllib and the requests library.
 
 from urllib.request import urlretrieve
 from calendar import timegm
-import json
 import time
 import os
 import requests
@@ -20,7 +19,7 @@ print(last_run)
 def page_header():
     """HTML5 page header."""
     return """<!DOCTYPE html>
-<html>
+<html lang="en-US">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -68,7 +67,7 @@ def page_footer():
 
 def run(last_run_time):
     """Build the web page of avatars."""
-    if last_run_time > 60000:
+    if last_run_time > 2000:
         user_search = 'https://api.github.com/search/users?q=followers:1..10000000&per_page=100'
         user_searches = []
         for i in range(1, 4):

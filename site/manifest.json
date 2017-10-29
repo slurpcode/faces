@@ -12,6 +12,11 @@
       "src": "images/other/hm-192.png",
       "sizes": "192x192",
       "type": "image/png"
+    },
+    {
+      "src": "images/other/hm-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
   "lang": "en-US",
