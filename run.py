@@ -28,6 +28,8 @@ def page_header():
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Top Github Faces</title>
         <!-- Latest compiled and minified CSS -->
+        <link rel="manifest" href="manifest.json">
+        <meta name="theme-color" content="#FF0000">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <style>
             .row {float: left;}
@@ -51,7 +53,7 @@ def page_header():
 def page_footer():
     """HTML5 page footer."""
     return """
-            <a href="https://info.flagcounter.com/sesT">
+            <a href="https://info.flagcounter.com/sesT" target="_blank" rel="noopener">
                 <img id="flagcounter" alt="Flag Counter" 
                      src="https://s11.flagcounter.com/count2/sesT/bg_FFFFFF/txt_000000/border_CCCCCC/columns_3/maxflags_100/viewers_0/labels_0/pageviews_0/flags_0/percent_0/">
             </a>
@@ -116,7 +118,7 @@ def run(last_run_time):
             <div class="row">
                 <div class="col-md-4">
                     <div class="thumbnail">
-                        <a href="{profile}" target="_blank">
+                        <a href="{profile}" target="_blank" rel="noopener">
                             <img src="{filename}" alt="{user}" title="{user}">
                         </a>
                     </div>
