@@ -34,6 +34,6 @@
   "theme_color": "#FF0000",
   "background_color": "#FFFFFF",
   "start_url": "index.html",
-  "display": "minimal-ui",
+  "display": "standalone",
   "orientation": "landscape"
 }
