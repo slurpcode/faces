@@ -44,6 +44,19 @@ def page_header():
             gtag('js', new Date());        
             gtag('config', 'UA-106852135-1');
         </script>
+        <script>
+          if ('serviceWorker' in navigator) {
+
+            navigator.serviceWorker.register('service-worker.js', {scope: './'}).then(function(registration) {
+
+            }).catch(function(error) {
+
+            });
+          } else {
+            // The current browser doesn't support service workers.
+
+          }
+        </script>
     </head>
     <body>
         <div class="container-fluid">"""
@@ -67,7 +80,7 @@ def page_footer():
 
 def run(last_run_time):
     """Build the web page of avatars."""
-    if last_run_time > 2000:
+    if last_run_time > 200:
         user_search = 'https://api.github.com/search/users?q=followers:1..10000000&per_page=100'
         user_searches = []
         for i in range(1, 4):
