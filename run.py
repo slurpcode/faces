@@ -12,7 +12,7 @@ import requests
 
 
 # debug / change run time
-last_run = int(time.time()) - os.path.getmtime("./site/index.html")
+last_run = int(time.time()) - os.path.getmtime('./site/index.html')
 print(last_run)
 
 
@@ -25,8 +25,7 @@ def page_header():
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Top Github Faces</title>
-        <!-- Latest compiled and minified CSS -->
+        <title>Top Github Faces</title>        
         <link rel="manifest" href="manifest.json">
         <meta name="theme-color" content="#FF0000">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -66,10 +65,16 @@ def page_footer():
     """HTML5 page footer."""
     return """
             <a href="https://info.flagcounter.com/sesT" target="_blank" rel="noopener">
-                <img id="flagcounter" alt="Flag Counter" 
-                     src="https://s11.flagcounter.com/count2/sesT/bg_FFFFFF/txt_000000/border_CCCCCC/columns_3/maxflags_100/viewers_0/labels_0/pageviews_0/flags_0/percent_0/">
+                <img id="flagcounter" alt="Flag Counter">
             </a>
-        </div>       
+            <script>
+                if(navigator.onLine){
+                    document.getElementById("flagcounter").src = "https://s11.flagcounter.com/count2/sesT/bg_FFFFFF/txt_000000/border_CCCCCC/columns_3/maxflags_100/viewers_0/labels_0/pageviews_0/flags_0/percent_0/";
+                } else {
+                    document.getElementById("flagcounter").src = "images/other/flagcounter.png";
+                }
+            </script>
+        </div> 
         <!-- Latest compiled and minified JavaScript -->
         <script src="bootstrap/js/jquery.min.js"></script>
         <script src="bootstrap/js/popper.min.js"></script> 
@@ -102,7 +107,7 @@ def run(last_run_time):
                 # fix ?? for deleting old avatars that are no longer top 200.
                 # wait until we have 201 or more avatars to test code.
                 try:
-                    localtime = os.path.getmtime("./site/images/faces/%s.png" % person['login'])
+                    localtime = os.path.getmtime('./site/images/faces/%s.png' % person['login'])
                 except FileNotFoundError:
                     localtime = 0
 
@@ -113,16 +118,16 @@ def run(last_run_time):
                     first_line = fname.readline().rstrip()
 
                     print(first_line)
-                    print(time.strptime(first_line, "%a, %d %b %Y %H:%M:%S GMT"))
-                    print(timegm(time.strptime(first_line, "%a, %d %b %Y %H:%M:%S GMT")))
+                    print(time.strptime(first_line, '%a, %d %b %Y %H:%M:%S GMT'))
+                    print(timegm(time.strptime(first_line, '%a, %d %b %Y %H:%M:%S GMT')))
 
-                    remotetime = timegm(time.strptime(first_line, "%a, %d %b %Y %H:%M:%S GMT"))
+                    remotetime = timegm(time.strptime(first_line, '%a, %d %b %Y %H:%M:%S GMT'))
 
                     # only download users avatar if its newer than the current local one.
                     if localtime < remotetime:
                         print('remote newer')
                         urlretrieve(person['avatar_url'],
-                                    "./site/images/faces/%s.png" % person['login'])
+                                    './site/images/faces/%s.png' % person['login'])
                     else:
                         print('local newer')
 
@@ -136,9 +141,11 @@ def run(last_run_time):
                     </div>
                 </div>      
             </div>""".format(profile=person['html_url'],
-                             filename="./images/faces/%s.png" % person['login'],
+                             filename='./images/faces/%s.png' % person['login'],
                              user=person['login'])
-
+        # retrieve the flag counter for offline use
+        urlretrieve('https://s11.flagcounter.com/count2/sesT/bg_FFFFFF/txt_000000/border_CCCCCC/columns_3/maxflags_100/viewers_0/labels_0/pageviews_0/flags_0/percent_0/',
+                    './site/images/other/flagcounter.png')
         # HTML page footer
         page += page_footer()
         # write page to file
