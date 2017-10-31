@@ -33,7 +33,7 @@ def page_header():
         <style>
             .row {float: left;}
             body {line-height: 0;}
-            .col-md-4, div.row, img {width: 374px; height: 374px;}
+            .col-md-4, div.row, img {width: 374px; height: 374px; padding: 0px;}
             #flagcounter {width: auto; height: auto; position: fixed; bottom: 0px; left: 0px; margin-top: 65px; }
         </style>
          <!-- Global Site Tag (gtag.js) - Google Analytics -->
