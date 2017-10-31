@@ -14,7 +14,7 @@
 // Names of the two caches used in this version of the service worker.
 // Change to v2, etc. when you update any of the local resources, which will
 // in turn trigger the install event again.
-const PRECACHE = 'precache-v3';
+const PRECACHE = 'precache-v4';
 const RUNTIME = 'runtime';
 
 // A list of local resources we always want to be cached.
@@ -27,8 +27,7 @@ const PRECACHE_URLS = [
   'bootstrap/css/bootstrap-reboot.css',
   'bootstrap/js/bootstrap.min.js',
   'bootstrap/js/jquery.min.js',
-  'bootstrap/js/popper.min.js',
-  'https://s11.flagcounter.com/count2/sesT/bg_FFFFFF/txt_000000/border_CCCCCC/columns_3/maxflags_100/viewers_0/labels_0/pageviews_0/flags_0/percent_0/'
+  'bootstrap/js/popper.min.js'
 ];
 
 // The install handler takes care of precaching the resources we always need.
