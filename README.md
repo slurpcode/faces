@@ -4,7 +4,7 @@
 
 https://hackermanifesto.github.io/faces/
 
-More to come soon...
+More to come soon....
 
 ## Powered by
 
