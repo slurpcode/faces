@@ -42,19 +42,17 @@ def page_header():
             function gtag(){dataLayer.push(arguments)};
             gtag('js', new Date());        
             gtag('config', 'UA-106852135-1');
-        </script>
-        <script>
-          if ('serviceWorker' in navigator) {
-
-            navigator.serviceWorker.register('service-worker.js', {scope: './'}).then(function(registration) {
-
-            }).catch(function(error) {
-
-            });
-          } else {
+        
+            if ('serviceWorker' in navigator) {
+            
+                navigator.serviceWorker.register('service-worker.js', {scope: './'}).then(function(registration) {
+            
+                }).catch(function(error) {
+            
+                });
+            } else {
             // The current browser doesn't support service workers.
-
-          }
+            }
         </script>
     </head>
     <body>
@@ -104,8 +102,8 @@ def run(last_run_time):
                 print(k, person)
                 user_logins.append(person['login'])
 
-                # fix ?? for deleting old avatars that are no longer top 200.
-                # wait until we have 201 or more avatars to test code.
+                # fix ?? for deleting old avatars that are no longer top 300
+                # wait until we have more avatars to try garbage collection
                 try:
                     localtime = os.path.getmtime('./site/images/faces/%s.png' % person['login'])
                 except FileNotFoundError:
