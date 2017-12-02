@@ -76,8 +76,7 @@ def page_footer():
                     document.getElementById("flagcounter").src = "images/other/flagcounter.png";
                 }
             </script>
-        </div> 
-        <!-- Latest compiled and minified JavaScript -->
+        </div>
         <script src="bootstrap/js/jquery.min.js"></script>
         <script src="bootstrap/js/popper.min.js"></script> 
         <script src="bootstrap/js/bootstrap.min.js"></script>    
