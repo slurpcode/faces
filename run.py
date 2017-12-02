@@ -33,16 +33,17 @@ def page_header():
             .row {float: left;}
             body {line-height: 0;}
             .col-md-4, div.row, img {width: 374px; height: 374px; padding: 0px;}
-            #flagcounter {width: auto; height: auto; position: fixed; bottom: 0px; left: 0px; margin-top: 65px; }
+            #flagcounter {width: auto; height: auto; position: fixed; bottom: 0px; left: 0px; margin-top: 65px;}
+            div#head {width: 100%; height: auto;}
+            h1 {text-align: center; width: 100%;}
         </style>
-         <!-- Global Site Tag (gtag.js) - Google Analytics -->
+        <!-- Global Site Tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-106852135-1"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments)};
             gtag('js', new Date());        
-            gtag('config', 'UA-106852135-1');
-        
+            gtag('config', 'UA-106852135-1');        
             if ('serviceWorker' in navigator) {
             
                 navigator.serviceWorker.register('service-worker.js', {scope: './'}).then(function(registration) {
@@ -56,7 +57,10 @@ def page_header():
         </script>
     </head>
     <body>
-        <div class="container-fluid">"""
+        <div class="container-fluid">
+            <div class="row" id="head">
+                <h1>Hacker Manifesto Faces</h1>
+            </div>"""
 
 
 def page_footer():
