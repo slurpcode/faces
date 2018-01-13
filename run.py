@@ -30,11 +30,10 @@ def page_header():
         <meta name="theme-color" content="#FF0000">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <style>
-            .row {float: left;}
-            body {line-height: 0;}
-            .col-md-4, div.row, img {width: 374px; height: 374px; padding: 0px;}
+           body {line-height: 0;}
+            .col-md-4, img, .thumbnail {width: 460px; max-width: 460px; height: 460px; padding: 0px; float: left; }
             #flagcounter {width: auto; height: auto; position: fixed; bottom: 0px; left: 0px; margin-top: 65px;}
-            div#head {width: 100%; height: auto;}
+            div#head {width: 100%; height: auto; }
             h1 {text-align: center; width: 100%;}
         </style>
         <!-- Global Site Tag (gtag.js) - Google Analytics -->
@@ -58,25 +57,22 @@ def page_header():
     </head>
     <body>
         <div class="container-fluid">
-            <div class="row" id="head">
+            <div id="head">
                 <h1>Hacker Manifesto Faces</h1>
-            </div>"""
+            </div>            
+            """
 
 
 def page_footer():
     """HTML5 page footer."""
     return """
-            <a href="https://info.flagcounter.com/sesT" target="_blank" rel="noopener">
-                <img id="flagcounter" alt="Flag Counter">
-            </a>
-            <script>
-                if(navigator.onLine){
-                    document.getElementById("flagcounter").src = "https://s11.flagcounter.com/count2/sesT/bg_FFFFFF/txt_000000/border_CCCCCC/columns_3/maxflags_100/viewers_0/labels_0/pageviews_0/flags_0/percent_0/";
-                } else {
-                    document.getElementById("flagcounter").src = "images/other/flagcounter.png";
-                }
-            </script>
-        </div>
+        <script>
+            if(navigator.onLine){
+                document.getElementById("flagcounter").src = "https://s11.flagcounter.com/count2/sesT/bg_FFFFFF/txt_000000/border_CCCCCC/columns_3/maxflags_100/viewers_0/labels_0/pageviews_0/flags_0/percent_0/";
+            } else {
+                document.getElementById("flagcounter").src = "images/other/flagcounter.png";
+            }
+        </script>        
         <script src="bootstrap/js/jquery.min.js"></script>
         <script src="bootstrap/js/popper.min.js"></script> 
         <script src="bootstrap/js/bootstrap.min.js"></script>    
@@ -133,20 +129,23 @@ def run(last_run_time):
                         print('local newer')
 
                 page += """
-            <div class="row">
                 <div class="col-md-4">
                     <div class="thumbnail">
                         <a href="{profile}" target="_blank" rel="noopener">
                             <img src="{filename}" alt="{user}" title="{user}">
                         </a>
                     </div>
-                </div>      
-            </div>""".format(profile=person['html_url'],
-                             filename='./images/faces/%s.png' % person['login'],
-                             user=person['login'])
+                </div>""".format(profile=person['html_url'],
+                                 filename='./images/faces/%s.png' % person['login'],
+                                 user=person['login'])
         # retrieve the flag counter for offline use
         urlretrieve('https://s11.flagcounter.com/count2/sesT/bg_FFFFFF/txt_000000/border_CCCCCC/columns_3/maxflags_100/viewers_0/labels_0/pageviews_0/flags_0/percent_0/',
                     './site/images/other/flagcounter.png')
+        page += """
+            </div>
+            <a href="https://info.flagcounter.com/sesT" target="_blank" rel="noopener">
+                <img id="flagcounter" alt="Flag Counter">
+            </a>"""
         # HTML page footer
         page += page_footer()
         # write page to file
