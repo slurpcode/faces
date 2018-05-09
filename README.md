@@ -1,3 +1,5 @@
+<p align="left"><img src="logo/logo.png" alt="faces" height="180px"></p>
+
 # Top Faces of GitHub
 
 [![Build Status](https://travis-ci.org/HackerManifesto/faces.svg?branch=master)](https://travis-ci.org/HackerManifesto/faces)
