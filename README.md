@@ -1,4 +1,4 @@
-<p align="left"><img src="logo/logo.png" alt="faces" height="180px"></p>
+<img src="logo/logo.png" alt="faces" height="180px">
 
 # Top Faces of GitHub
 
