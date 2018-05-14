@@ -12,7 +12,7 @@ import requests
 
 
 # debug / change run time
-last_run = int(time.time()) - os.path.getmtime('./site/index.html')
+last_run = int(time.time()) - os.path.getmtime('./site/index.html')  # pylint: disable=invalid-name
 print(last_run)
 
 
@@ -80,7 +80,7 @@ def page_footer():
 </html>"""
 
 
-def run(last_run_time):
+def run(last_run_time):  # pylint: disable=too-many-locals
     """Build the web page of avatars."""
     if last_run_time > 200:
         user_search = 'https://api.github.com/search/users?q=followers:1..10000000&per_page=100'
@@ -139,7 +139,7 @@ def run(last_run_time):
                                  filename='./images/faces/%s.png' % person['login'],
                                  user=person['login'])
         # retrieve the flag counter for offline use
-        urlretrieve('https://s11.flagcounter.com/count2/sesT/bg_FFFFFF/txt_000000/border_CCCCCC/columns_3/maxflags_100/viewers_0/labels_0/pageviews_0/flags_0/percent_0/',
+        urlretrieve('https://s11.flagcounter.com/count2/sesT/bg_FFFFFF/txt_000000/border_CCCCCC/columns_3/maxflags_100/viewers_0/labels_0/pageviews_0/flags_0/percent_0/',  # pylint: disable=line-too-long
                     './site/images/other/flagcounter.png')
         page += """
             </div>
