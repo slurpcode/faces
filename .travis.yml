@@ -11,7 +11,9 @@ python:
 install: "pip install requests flake8 pylint"
 
 script:
+  - pylint --version
   - pylint run.py
+  - flake8 --version
   - flake8 --ignore=E501 run.py
   - python run.py
 
