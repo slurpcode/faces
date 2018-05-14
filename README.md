@@ -2,7 +2,9 @@
 
 # Top Faces of GitHub
 
-[![Build Status](https://travis-ci.org/HackerManifesto/faces.svg?branch=master)](https://travis-ci.org/HackerManifesto/faces) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/HackerManifesto/faces/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/HackerManifesto/faces.svg?branch=master)](https://travis-ci.org/HackerManifesto/faces) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/HackerManifesto/faces/blob/master/LICENSE)
+[![GitHub contributors](https://img.shields.io/github/contributors/HackerManifesto/faces.svg)](https://github.com/HackerManifesto/faces/graphs/contributors)
 
 https://hackermanifesto.github.io/faces/
 
