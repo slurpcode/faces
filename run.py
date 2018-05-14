@@ -25,7 +25,7 @@ def page_header():
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Top Github Faces</title>        
+        <title>Top Github Faces</title>
         <link rel="manifest" href="manifest.json">
         <meta name="theme-color" content="#FF0000">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -41,14 +41,14 @@ def page_header():
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments)};
-            gtag('js', new Date());        
-            gtag('config', 'UA-106852135-1');        
+            gtag('js', new Date());
+            gtag('config', 'UA-106852135-1');
             if ('serviceWorker' in navigator) {
-            
+
                 navigator.serviceWorker.register('service-worker.js', {scope: './'}).then(function(registration) {
-            
+
                 }).catch(function(error) {
-            
+
                 });
             } else {
             // The current browser doesn't support service workers.
@@ -59,7 +59,7 @@ def page_header():
         <div class="container-fluid">
             <div id="head">
                 <h1>Hacker Manifesto Faces</h1>
-            </div>            
+            </div>
             """
 
 
@@ -72,10 +72,10 @@ def page_footer():
             } else {
                 document.getElementById("flagcounter").src = "images/other/flagcounter.png";
             }
-        </script>        
+        </script>
         <script src="bootstrap/js/jquery.min.js"></script>
-        <script src="bootstrap/js/popper.min.js"></script> 
-        <script src="bootstrap/js/bootstrap.min.js"></script>    
+        <script src="bootstrap/js/popper.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
     </body>
 </html>"""
 
