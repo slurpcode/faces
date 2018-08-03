@@ -25,20 +25,16 @@ def page_header():
         <meta name="theme-color" content="#FF0000">
         <meta property="og:description" content="A script that will scrape your face off">
         <meta property="og:image" content="https://hackermanifesto.github.io/faces/images/meta/faces-script.png">
-        <meta property="og:image:width" content="735">
-        <meta property="og:image:height" content="325">
+        <meta property="og:image:width" content="429">
+        <meta property="og:image:height" content="246">
         <meta property="og:image:alt" content="A script that will scrape your face off">
         <meta property="og:image" content="https://hackermanifesto.github.io/faces/images/meta/hm-logo.jpg">
         <meta property="og:image:width" content="420">
         <meta property="og:image:height" content="420">
         <meta property="og:image:alt" content="Hacker Manifesto">
-        <meta property="og:image" content="https://hackermanifesto.github.io/faces/images/meta/python-logo.png">
-        <meta property="og:image:width" content="601">
-        <meta property="og:image:height" content="203">
-        <meta property="og:image:alt" content="Python Powered">
-        <meta property="og:image" content="https://hackermanifesto.github.io/faces/images/meta/curl.jpg">
-        <meta property="og:image:width" content="420">
-        <meta property="og:image:height" content="115">
+        <meta property="og:image" content="https://hackermanifesto.github.io/faces/images/meta/curl.png">
+        <meta property="og:image:width" content="768">
+        <meta property="og:image:height" content="294">
         <meta property="og:image:alt" content="cURL Powered">
         <meta property="og:image" content="https://hackermanifesto.github.io/faces/images/meta/tessa.png">
         <meta property="og:image:width" content="3000">
