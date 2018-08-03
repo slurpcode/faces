@@ -23,39 +23,31 @@ def page_header():
         <title>Top Github Faces</title>
         <link rel="manifest" href="manifest.json">
         <meta name="theme-color" content="#FF0000">
-        
         <meta property="og:description" content="A script that will scrape your face off">
-                
         <meta property="og:image" content="https://hackermanifesto.github.io/images/meta/faces-script.png">
         <meta property="og:image:width" content="735">
         <meta property="og:image:height" content="325">
         <meta property="og:image:alt" content="A script that will scrape your face off">
-        
         <meta property="og:image" content="https://hackermanifesto.github.io/images/meta/hm-logo.jpg">
         <meta property="og:image:width" content="420">
         <meta property="og:image:height" content="420">
         <meta property="og:image:alt" content="Hacker Manifesto">
-        
         <meta property="og:image" content="https://hackermanifesto.github.io/images/meta/python-logo.png">
         <meta property="og:image:width" content="601">
         <meta property="og:image:height" content="203">
         <meta property="og:image:alt" content="Python Powered">
-        
         <meta property="og:image" content="https://hackermanifesto.github.io/images/meta/curl.jpg">
         <meta property="og:image:width" content="420">
         <meta property="og:image:height" content="115">
-        <meta property="og:image:alt" content="cURL Powered">        
-        
+        <meta property="og:image:alt" content="cURL Powered">
         <meta property="og:image" content="https://hackermanifesto.github.io/images/meta/tessa.png">
         <meta property="og:image:width" content="3000">
         <meta property="og:image:height" content="2905">
         <meta property="og:image:alt" content="Running on Travis CI">
-        
         <meta property="og:site_name" content="Hacker Manifesto Faces">
         <meta property="og:title" content="Hacker Manifesto Faces">
         <meta property="og:type" content="website">
         <meta property="og:url" content="https://hackermanifesto.github.io/faces">
-        
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <style>
            body {line-height: 0;}
