@@ -33,13 +33,13 @@ def page_header():
         <meta property="og:image:height" content="420">
         <meta property="og:image:alt" content="Hacker Manifesto">
         <meta property="og:image" content="https://hackermanifesto.github.io/faces/images/meta/curl.png">
-        <meta property="og:image:width" content="768">
-        <meta property="og:image:height" content="294">
+        <meta property="og:image:width" content="650">
+        <meta property="og:image:height" content="249">
         <meta property="og:image:alt" content="cURL Powered">
-        <meta property="og:image" content="https://hackermanifesto.github.io/faces/images/meta/tessa.png">
-        <meta property="og:image:width" content="3000">
-        <meta property="og:image:height" content="2905">
-        <meta property="og:image:alt" content="Running on Travis CI">
+        <meta property="og:image" content="https://hackermanifesto.github.io/faces/images/meta/google-developers.png">
+        <meta property="og:image:width" content="2729">
+        <meta property="og:image:height" content="1833">
+        <meta property="og:image:alt" content="Google Developers">
         <meta property="og:site_name" content="Hacker Manifesto Faces">
         <meta property="og:title" content="Hacker Manifesto Faces">
         <meta property="og:type" content="website">
