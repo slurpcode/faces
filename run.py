@@ -19,31 +19,32 @@ def page_header():
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <!-- The above 3 meta tags *must* come first in the head; any other head
+             content must come *after* these tags -->
         <title>Top Github Faces</title>
         <link rel="manifest" href="manifest.json">
         <meta name="theme-color" content="#FF0000">
         <meta property="og:description" content="A script that will scrape your face off">
-        <meta property="og:image" content="https://hackermanifesto.github.io/faces/images/meta/faces-script.png">
+        <meta property="og:image" content="https://slurpcode.github.io/faces/images/meta/faces-script.png">
         <meta property="og:image:width" content="429">
         <meta property="og:image:height" content="246">
         <meta property="og:image:alt" content="A script that will scrape your face off">
-        <meta property="og:image" content="https://hackermanifesto.github.io/faces/images/meta/hm-logo.jpg">
+        <meta property="og:image" content="https://slurpcode.github.io/faces/images/meta/hm-logo.jpg">
         <meta property="og:image:width" content="420">
         <meta property="og:image:height" content="420">
         <meta property="og:image:alt" content="Hacker Manifesto">
-        <meta property="og:image" content="https://hackermanifesto.github.io/faces/images/meta/curl.png">
+        <meta property="og:image" content="https://slurpcode.github.io/faces/images/meta/curl.png">
         <meta property="og:image:width" content="650">
         <meta property="og:image:height" content="249">
         <meta property="og:image:alt" content="cURL Powered">
-        <meta property="og:image" content="https://hackermanifesto.github.io/faces/images/meta/google-developers.png">
+        <meta property="og:image" content="https://slurpcode.github.io/faces/images/meta/google-developers.png">
         <meta property="og:image:width" content="2729">
         <meta property="og:image:height" content="1833">
         <meta property="og:image:alt" content="Google Developers">
         <meta property="og:site_name" content="Hacker Manifesto Faces">
         <meta property="og:title" content="Hacker Manifesto Faces">
         <meta property="og:type" content="website">
-        <meta property="og:url" content="https://hackermanifesto.github.io/faces">
+        <meta property="og:url" content="https://slurpcode.github.io/faces">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <style>
            body {line-height: 0;}
@@ -74,9 +75,9 @@ def page_header():
     <body>
         <div class="container-fluid">
             <div id="head">
-                <h1>Hacker Manifesto Faces</h1>
+                <h1>The 400 Faces</h1>
             </div>
-            """
+"""
 
 
 def page_footer():
@@ -124,9 +125,9 @@ def run():  # pylint: disable=too-many-locals
                 localtime = 0
 
             with open(('./temp/%s.txt' % person['login']), 'w+') as fname:
-                curl_string = "curl --silent --head %s | awk '/^Last-Modified/{print $0}'"
-                curl_string += " | sed 's/^Last-Modified: //' > %s"
+                curl_string = "curl --silent --head %s | grep $'^last-modified: ' | cut -d' ' -f2- > %s"
                 os.system(curl_string % (person['avatar_url'], fname.name))
+                print("first_line")
                 first_line = fname.readline().rstrip()
 
                 print(first_line)
