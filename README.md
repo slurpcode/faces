@@ -1,4 +1,4 @@
-# Top Faces of GitHub
+# The 400 Faces - A script that will scrape your face off
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/slurpcode/faces/blob/master/LICENSE)
 [![GitHub contributors](https://img.shields.io/github/contributors/slurpcode/faces.svg)](https://github.com/slurpcode/faces/graphs/contributors)
