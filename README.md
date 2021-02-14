@@ -1,6 +1,6 @@
 # Top Faces of GitHub
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/HackerManifesto/faces/blob/master/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/slurpcode/faces/blob/master/LICENSE)
 [![GitHub contributors](https://img.shields.io/github/contributors/slurpcode/faces.svg)](https://github.com/slurpcode/faces/graphs/contributors)
 
 More to come soon....
